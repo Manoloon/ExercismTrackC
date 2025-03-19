@@ -28,7 +28,7 @@ static void test_binary_10_is_decimal_2(void)
 
 static void test_binary_11_is_decimal_3(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
    TEST_ASSERT_EQUAL(3, convert("11"));
 }
 
