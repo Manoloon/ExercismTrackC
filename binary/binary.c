@@ -1,17 +1,27 @@
 #include "binary.h"
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 
 int convert(const char *input) 
 { 
-    if(input == 0) return 0;
+    if(input == NULL) return 0;
     size_t length = strlen(input);
-    int num = strtol(input,NULL,10);
-    int result = 0;
-    for(size_t i = 0; i < length; i++ )
-    {
-        
+    
+    // with this line you have almost all the exercise resolve.
+    //int num = strtol(input,NULL,2);
+    ////////////////////////////////
+
+    size_t result = 0;
+    for(size_t i = 0; i < length; ++i )
+    {   
+        if(input[i] == '1')
+        {
+            result += (1 << (length - 1 - i));
+        }
+        else if(input[i] != '0')
+        {
+            return INVALID;
+        }
     }
-    return num; 
+    return (int)result; 
 }
