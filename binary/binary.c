@@ -4,18 +4,24 @@
 
 int convert(const char *input) 
 { 
-    if(input == 0) return 0;
+    if(input == NULL) return 0;
     size_t length = strlen(input);
     
     // with this line you have almost all the exercise resolve.
     //int num = strtol(input,NULL,2);
     ////////////////////////////////
 
-    int num = atoi(input);
-    int result = 0;
-    for(size_t i = 0; i < length; i++ )
+    size_t result = 0;
+    for(size_t i = 0; i < length; ++i )
     {   
-        result +=;
+        if(input[i] == '1')
+        {
+            result += (1 << (length - 1 - i));
+        }
+        else if(input[i] != '0')
+        {
+            return INVALID;
+        }
     }
-    return result; 
+    return (int)result; 
 }
