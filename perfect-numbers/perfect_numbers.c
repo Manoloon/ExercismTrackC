@@ -2,7 +2,7 @@
 
 kind classify_number(int num) 
 {
-    if(num <= 0) return ERROR;
+    if(num < 1) return ERROR;
     if(num == 1) return DEFICIENT_NUMBER;
     int sum=0;
     for(int i = 1; i < num;++i)
