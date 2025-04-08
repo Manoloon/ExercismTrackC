@@ -5,10 +5,11 @@
 
 bool is_armstrong_number(int candidate)
 {
+    if(candidate < 0 ) return false;
     if(candidate < 10) return true;
     int result = 0;
     int num = candidate;
-    int digits = log10(candidate);
+    int digits = floor(log10(candidate))+1;
     while (num > 0)
     {
         int r = num % 10;

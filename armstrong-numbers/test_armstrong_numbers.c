@@ -46,19 +46,19 @@ static void test_four_digit_number_that_is_an_armstrong_number(void)
 
 static void test_four_digit_number_that_is_not_an_armstrong_number(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
    TEST_ASSERT_FALSE(is_armstrong_number(9475));
 }
 
 static void test_seven_digit_number_that_is_an_armstrong_number(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
    TEST_ASSERT_TRUE(is_armstrong_number(9926315));
 }
 
 static void test_seven_digit_number_that_is_not_an_armstrong_number(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
    TEST_ASSERT_FALSE(is_armstrong_number(9926314));
 }
 
