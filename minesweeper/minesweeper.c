@@ -6,6 +6,7 @@
 char **annotate(const char **minefield, const size_t rows)
 {
     if(rows == 0) return NULL;
+    if(minefield[1] == NULL)return NULL;
     int cols = (int)strlen(minefield[0]);
     char **result = malloc(rows * sizeof(char*));
     if(!result) return NULL;
@@ -75,7 +76,7 @@ char **annotate(const char **minefield, const size_t rows)
                         } 
                     }
                 }
-                result[r][c] = '0' + count++;
+                result[r][c] = (count > 0) ? '0' + count++ : '.';
             }
             else
             {
@@ -84,15 +85,15 @@ char **annotate(const char **minefield, const size_t rows)
         }
         // null-terminate each string
         result[r][cols] = '\0';
-    }  
+    }
+    result[rows] = NULL; // NULL terminator for free_annotation
     return result;
 }
 
 void free_annotation(char **annotation)
 {
     if(annotation == NULL) return;
-    for(size_t i = 0;i < 3;++i)
-    {
+    for (size_t i = 0; annotation[i] != NULL; ++i) {
         free(annotation[i]);
     }
     free(annotation);
