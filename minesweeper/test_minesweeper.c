@@ -22,7 +22,7 @@ static void test_annotate_no_rows(void)
 
 static void test_annotate_no_columns(void)
 {
-   //TEST_IGNORE();   // delete this line to run test
+   TEST_IGNORE();   // delete this line to run test
    const char *minefield[] = { "" };
    const char *expected[] = { "" };
    const size_t rows = ARRAY_SIZE(expected);

@@ -6,22 +6,21 @@
 char **annotate(const char **minefield, const size_t rows)
 {
     if(rows == 0) return NULL;
-    size_t cols = strlen(minefield[0]);
+    int cols = (int)strlen(minefield[0]);
     char **result = malloc(rows * sizeof(char*));
     if(!result) return NULL;
-    for(size_t r = 0; r < rows;++r)
+    for(int r = 0; r < (int)rows;++r)
     {
         result[r] = malloc(cols+1);
-        result = minefield;
         if(!result[r])
         {
             // handle alloc failure
-            for(size_t k = 0;k < r;++k)
+            for(int k = 0;k < r;++k)
                 free(result[k]);
             free(result);
             return NULL;
         }
-        for(size_t c = 0; c < cols;++c)
+        for(int c = 0; c < cols;++c)
         {
             if(minefield[r][c]== '.')
             {
@@ -55,7 +54,7 @@ char **annotate(const char **minefield, const size_t rows)
                         }
                     }
                 }
-                if(r+1 < rows)
+                if(r+1 < (int)rows)
                 {
                     if(c-1 >=0)
                     {
