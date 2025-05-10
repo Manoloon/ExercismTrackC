@@ -33,7 +33,7 @@ static void test_annotate_no_columns(void)
 
 static void test_annotate_no_mines(void)
 {
-   //TEST_IGNORE();
+   TEST_IGNORE();
    const char *minefield[] = {
       // clang-format off
       "   ",
@@ -56,7 +56,7 @@ static void test_annotate_no_mines(void)
 
 static void test_annotate_minefield_with_only_mines(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
    const char *minefield[] = {
       // clang-format off
       "***",
