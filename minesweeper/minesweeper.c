@@ -26,7 +26,18 @@ char **annotate(const char **minefield, const size_t rows)
             if(minefield[r][c] == '.' || minefield[r][c] == ' ')
             {
                 int count = 0;
-                //char empty = minefield[r][c];
+                for(int dr = -1; dr <= 1;++dr)
+                {
+                    for(int dc = -1;dc <= 1;++dc)
+                    {
+                        if(dr == 0 && dc == 0) continue;
+                        int nr = r +dr;
+                        int nc = c +dc;
+                        if(nr >= 0 && nr < rows && nc >= 0 && nc < cols && minefield[nr][nc] == '*')
+                           count++;
+                    }
+                }
+                \\ //
                 if(r-1 >= 0)
                 {
                     if(c-1 >= 0)
