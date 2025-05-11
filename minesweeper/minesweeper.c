@@ -9,7 +9,7 @@ char **annotate(const char **minefield, const size_t rows)
     if(minefield[0]== NULL) return NULL;
     
     int cols = (int)strlen(minefield[0]);
-    char **result = malloc(rows * sizeof(char*));
+    char** result = calloc(rows +1, sizeof(char*));
     if(!result) return NULL;
     
     for(int r = 0; r < (int)rows;++r)
@@ -26,6 +26,7 @@ char **annotate(const char **minefield, const size_t rows)
             if(minefield[r][c] == '.' || minefield[r][c] == ' ')
             {
                 int count = 0;
+                char emptyChar = minefield[r][c];
                 for(int dr = -1; dr <= 1;++dr)
                 {
                     for(int dc = -1;dc <= 1;++dc)
@@ -33,59 +34,8 @@ char **annotate(const char **minefield, const size_t rows)
                         if(dr == 0 && dc == 0) continue;
                         int nr = r +dr;
                         int nc = c +dc;
-                        if(nr >= 0 && nr < rows && nc >= 0 && nc < cols && minefield[nr][nc] == '*')
+                        if(nr >= 0 && nr <(int)rows && nc >= 0 && nc < cols && minefield[nr][nc] == '*')
                            count++;
-                    }
-                }
-                \\ //
-                if(r-1 >= 0)
-                {
-                    if(c-1 >= 0)
-                    {
-                        if(minefield[r-1][c-1]=='*')
-                        {
-                            count++;
-                        }
-                        if(minefield[r-1][c]=='*')
-                        {
-                            count++;
-                        }
-                        if(minefield[r][c-1]=='*')
-                        {
-                            count++;
-                        }
-                    }
-                    if(c+1 < cols)
-                    {
-                        if(minefield[r-1][c+1]=='*')
-                        {
-                            count++;
-                        }
-                        if(minefield[r][c+1]=='*')
-                        {
-                            count++;
-                        }
-                    }
-                }
-                if(r+1 < (int)rows)
-                {
-                    if(c-1 >=0)
-                    {
-                        if(minefield[r+1][c-1]=='*')
-                        {
-                            count++;
-                        } 
-                        if(minefield[r+1][c]=='*')
-                        {
-                            count++;
-                        }
-                    }
-                    if(c+1 <= cols)
-                    {
-                        if(minefield[r+1][c+1]=='*')
-                        {
-                           count++;
-                        } 
                     }
                 }
                 if(count > 0)
@@ -94,8 +44,12 @@ char **annotate(const char **minefield, const size_t rows)
                 }
                 else
                 {
-                    result[r][c] = '.';
+                    result[r][c] = emptyChar;
                 }
+            }
+            else
+            {
+                result[r][c]= '*';
             }
         }
         // null-terminate each string
