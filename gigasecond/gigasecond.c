@@ -10,6 +10,8 @@
 void gigasecond(time_t input, char *output, size_t size)
 {
     printf("%lld\n",input);
+    char year = strftime(output,20,"%Y-%m-%d %H:%M:%S",localtime(&input));
+    printf("%lld\n",input);
     printf("%lld\n",size);
     output = "1000";
     printf("%s\n",output);
