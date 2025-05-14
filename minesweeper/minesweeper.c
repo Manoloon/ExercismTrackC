@@ -34,7 +34,7 @@ char **annotate(const char **minefield, const size_t rows)
                         if(dr == 0 && dc == 0) continue;
                         int nr = r +dr;
                         int nc = c +dc;
-                        if(nr >= 0 && nr <(int)rows && nc >= 0 && nc < cols && minefield[nr][nc] == '*')
+                        if(nr >= 0 && nr < (int)rows && nc >= 0 && nc < cols && minefield[r][c] == '*')
                            count++;
                     }
                 }
