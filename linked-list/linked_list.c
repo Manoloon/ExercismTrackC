@@ -38,14 +38,16 @@ size_t list_count(const struct list *list)
 void list_push(struct list *list, ll_data_t item_data)
 {
    struct list_node* newNode = malloc(sizeof(struct list_node));
-   newNode->next = list->first;
+   if(newNode == NULL) return;
+   newNode->next = NULL;
    newNode->data = item_data;
-   while(1)
+   newNode->prev = list->last;
+   if(list->last)
    {
-      if(newNode->next == NULL)
-      {
-         break;
-      }
+      list->last->next = newNode;
+   }
+   else
+   {
       list->first = newNode;
    }
    list->last = newNode;
@@ -55,13 +57,17 @@ ll_data_t list_pop(struct list *list)
 {
    // mean list is empty;
    if(list->last == NULL) return -1;
-   ll_data_t data = list->last->data;
+   struct list_node* to_remove = list->last;
+   ll_data_t data = to_remove->data;
+   list->last = to_remove->prev;
    // take prev from the item to pop
    // on the new last item set the next to null
-   list->last->prev->next = NULL;
+   if(list->last != NULL)
+      list->last->prev->next = NULL;
+   else
+      list->first = NULL;
    // remove last item from list
-   free(list->last);
-   list->last = NULL;
+   free(to_remove);
    // and return its data
    return data;
 }
@@ -98,50 +104,28 @@ ll_data_t list_shift(struct list *list)
 void list_delete(struct list *list, ll_data_t data)
 {
    struct list_node* current_node = list->first;
-   while (1)
+   while (current_node != NULL && current_node->data == data)
    {
-      if(current_node->data == data)
-      {
-         break;
-      }
       current_node = current_node->next;
    }
-   if(current_node != NULL)
-   {
-      struct list_node* prevNode = current_node->prev;
-      struct list_node* nextNode = current_node->next;
-      if(nextNode != NULL)
-      {
-         prevNode->next = nextNode;
-         nextNode->prev = prevNode;
-      }
-      else if (current_node == list->last)
-      {
-         list->last = prevNode;
-      }
-      else if(current_node == list->first)
-      {
-         list->first = prevNode;
-      }
-      free(current_node);
-   }
-   
+   if(current_node == NULL) return;
+   if(current_node->prev != NULL)
+      current_node->prev->next = current_node->next;
+   else
+      list->first = current_node->next;
+   if(current_node->next != NULL)
+      current_node->next->prev = current_node->prev;
+   else
+      list->last = current_node->prev;
+
+   free(current_node);   
 }
 
 void list_destroy(struct list *list)
 {
-   // list not empty
-   if(list->last == NULL)
+   while (list->first != NULL)
    {
-      free(list);
-      return;
-   }
-   // free list
-   while (list->last != NULL)
-   {
-      free(list->last);
       list_shift(list);
    }
-   
-   // and nullify 
+   free(list);   
 }
