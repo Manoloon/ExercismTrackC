@@ -23,12 +23,15 @@ test: tests.out
 
 .PHONY: memcheck
 memcheck: ./*.c ./*.h
+	@echo Compiling $@
 	@$(CC) $(ASANFLAGS) $(CFLAGS) test-framework/unity.c ./*.c -o memcheck.out $(LIBS)
 	@./memcheck.out
+	@echo "Memory check passed"
 
 .PHONY: clean
 clean:
 	rm -rf *.o *.out *.out.dSYM
 
 tests.out: ./*.c ./*.h
+	@echo Compiling $@
 	@$(CC) $(CFLAGS) test-framework/unity.c ./*.c -o tests.out $(LIBS)
