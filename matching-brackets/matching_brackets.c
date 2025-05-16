@@ -8,13 +8,50 @@ bool is_paired(const char *input)
     if(input == NULL) return false;
     size_t size = strlen(input);
     printf("size %lld\n",size);
-    bool openBracket = false;
+    int openBracket = 0;
+    int openParenthesis = 0;
+    int openCoso = 0;
     for(size_t i= 0; i < size; ++i)
     {
-        if(input[i] == '[')
-            openBracket = true;
-        if(openBracket && input[i] == ']')
-            return true;
+        switch (input[i])
+        {
+        case '[':
+            openBracket++;
+            break;
+        case '(':
+            openParenthesis++;
+            break;
+        case '{':
+            openCoso++;
+            break;
+        case ']':
+            if(openBracket > 0)
+            {
+                openBracket--;
+                break;
+            }
+            else
+                return false;
+        case ')':
+            if(openParenthesis > 0)
+            {
+                openParenthesis--;
+                break;
+            }
+            else
+                return false;
+        case '}':
+            if(openCoso > 0)
+            {
+                openCoso--;
+                break;
+            }
+            else
+                return false;
+        default:
+            break;
+        }
     }
-    return false;
+    printf("brakets %d, Cosos %d, parenthesis %d",openBracket,openCoso,openParenthesis);
+    return openBracket + openCoso + openParenthesis == 0;
 }
