@@ -1,13 +1,11 @@
 #include "matching_brackets.h"
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 
 bool is_paired(const char *input)
 {
     if(input == NULL) return false;
     size_t size = strlen(input);
-    printf("size %lld\n",size);
     int openBracket = 0;
     int openParenthesis = 0;
     int openCoso = 0;
@@ -52,6 +50,5 @@ bool is_paired(const char *input)
             break;
         }
     }
-    printf("brakets %d, Cosos %d, parenthesis %d",openBracket,openCoso,openParenthesis);
     return openBracket + openCoso + openParenthesis == 0;
 }
