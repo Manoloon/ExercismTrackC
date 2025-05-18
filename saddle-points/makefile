@@ -1,6 +1,6 @@
 ### If you wish to use extra libraries (math.h for instance),
 ### add their flags here (-lm in our case) in the "LIBS" variable.
-
+CC = gcc
 LIBS = -lm
 
 ###
@@ -23,15 +23,12 @@ test: tests.out
 
 .PHONY: memcheck
 memcheck: ./*.c ./*.h
-	@echo Compiling $@
 	@$(CC) $(ASANFLAGS) $(CFLAGS) test-framework/unity.c ./*.c -o memcheck.out $(LIBS)
 	@./memcheck.out
-	@echo "Memory check passed"
 
 .PHONY: clean
 clean:
 	rm -rf *.o *.out *.out.dSYM
 
 tests.out: ./*.c ./*.h
-	@echo Compiling $@
 	@$(CC) $(CFLAGS) test-framework/unity.c ./*.c -o tests.out $(LIBS)
