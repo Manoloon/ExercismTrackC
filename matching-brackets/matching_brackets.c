@@ -6,49 +6,34 @@ bool is_paired(const char *input)
 {
     if(input == NULL) return false;
     size_t size = strlen(input);
-    int openBracket = 0;
-    int openParenthesis = 0;
-    int openCoso = 0;
+    char* stack = (char*)calloc(size,sizeof(char));
+    int top = -1;
     for(size_t i= 0; i < size; ++i)
     {
-        switch (input[i])
+        char curr = input[i];
+        if(curr == '(' || curr == '[' || curr == '{')
         {
-        case '[':
-            openBracket++;
-            break;
-        case '(':
-            openParenthesis++;
-            break;
-        case '{':
-            openCoso++;
-            break;
-        case ']':
-            if(openBracket > 0)
+            top++;
+            stack[top] = curr;
+        } 
+        else if (curr == ')' || curr == ']' || curr == '}')
+        {
+            if(top < 0)
             {
-                openBracket--;
-                break;
-            }
-            else
+                free(stack);
                 return false;
-        case ')':
-            if(openParenthesis > 0)
-            {
-                openParenthesis--;
-                break;
             }
-            else
-                return false;
-        case '}':
-            if(openCoso > 0)
-            {
-                openCoso--;
-                break;
-            }
-            else
-                return false;
-        default:
-            break;
+            char topChar = stack[top];
+            top--;
+            if (( curr == ')' && topChar != '(') ||
+                    (curr == ']' && topChar != '[') || 
+                    (curr == '}' && topChar != '{'))
+                    {
+                        free(stack);
+                        return false;
+                    }
         }
     }
-    return openBracket + openCoso + openParenthesis == 0;
+    free(stack);
+    return top == -1;
 }
