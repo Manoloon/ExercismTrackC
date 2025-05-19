@@ -14,7 +14,7 @@ saddle_points_t* saddle_points(int rows, int cols, unsigned char grid[rows][cols
     }
 
     int count = 0;
-    for(int r = 0; r < rows;++r)
+    for(int r = 1; r <= rows;++r)
     {
         int minC = 0;
         // find min in current row
@@ -28,7 +28,7 @@ saddle_points_t* saddle_points(int rows, int cols, unsigned char grid[rows][cols
         int isSaddle = 1;
         unsigned char best = grid[r][minC];
         // check if this Min is max in its column
-        for(int m = 0; m < rows;++m)
+        for(int m = 1; m <= rows;++m)
         {
             if(grid[m][minC] > best)
             {
