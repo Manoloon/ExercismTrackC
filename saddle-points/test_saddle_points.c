@@ -107,7 +107,7 @@ static void test_saddle_point_in_bottom_right_corner(void)
 
 static void test_saddle_points_in_non_square_matrix(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
    uint8_t matrix[2][3] = { { 3, 1, 3 }, { 3, 2, 4 } };
 
    size_t expected_count = 2;
@@ -136,7 +136,7 @@ test_saddle_points_in_single_column_matrix_are_those_with_the_minimum_value(
 static void
 test_saddle_points_in_single_row_matrix_are_those_with_the_maximum_value(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
    uint8_t matrix[1][4] = { { 2, 5, 3, 5 } };
 
    size_t expected_count = 2;

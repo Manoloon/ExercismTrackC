@@ -1,5 +1,4 @@
 #include "saddle_points.h"
-#include <stdio.h>
 
 saddle_points_t* saddle_points(int rows, int cols, unsigned char grid[rows][cols])
 {
@@ -15,35 +14,36 @@ saddle_points_t* saddle_points(int rows, int cols, unsigned char grid[rows][cols
     int count = 0;
     for(int r = 0; r < rows;r++)
     {
-        int MaxCol = 0;
+        unsigned char max = grid[r][0];
         // largest in its row,
         for(int c =0; c < cols;c++)
         {
-            if(grid[r][c] > grid[r][MaxCol])
+            if(grid[r][c] > max)
             {
-                MaxCol = c;
+                max = grid[r][c];
             }
         }
-        int isSaddle = 1;
-        unsigned char best = grid[r][MaxCol];
-        //  while being the smallest in its column
-        for(int m = 0; m < rows;m++)
+        for(int c = 0; c < cols;c++)
         {
-            if(grid[m][MaxCol] < best)
+            int isSaddle = 1;
+            //  while being the smallest in its column
+            for(int m = 0; m < rows;m++)
             {
-                isSaddle = 0;
-                break;
+                if(grid[m][c] < max)
+                {
+                    isSaddle = 0;
+                    break;
+                }
+            }
+            if(isSaddle)
+            {
+                result->points[count].row = r+1;
+                result->points[count].column = c+1;
+                count++;
             }
         }
-        if(isSaddle)
-        {
-            result->points[count].row = r+1;
-            result->points[count].column = MaxCol+1;
-            count++;
-        }        
     }
     result->count = count;
-    printf("Saddle Count [%d]\n",count);
     return result;
 }
 
