@@ -11,7 +11,7 @@ triplets_t *triplets_with_sum(int sum)
 
         int c = (sum / 2) - 1;
         int b = (sum - c)/2 + 1;
-        int a = (sum -c -b) -1;
+        int a = (sum -c -b);
         if((a < b && b < c) && (a + b + c == sum))
         {
             triplet->a = a;
