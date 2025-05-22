@@ -12,4 +12,5 @@ typedef struct triplets_t
 }triplets_t;
 
 triplets_t* triplets_with_sum(int sum);
+void free_triplets(triplets_t* triplets);
 #endif
