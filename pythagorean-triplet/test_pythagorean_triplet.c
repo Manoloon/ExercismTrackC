@@ -62,7 +62,7 @@ static void test_triplets_whose_sum_is_108(void)
 
 static void test_triplets_whose_sum_is_1000(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
    uint16_t sum = 1000;
    uint16_t expected_count = 1;
    triplet_t expected_triplets[] = { { 200, 375, 425 } };
