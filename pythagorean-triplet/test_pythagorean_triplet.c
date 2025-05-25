@@ -114,7 +114,7 @@ static void test_several_matching_triplets(void)
 
 static void test_triplets_for_large_number(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
    uint16_t sum = 30000;
    uint16_t expected_count = 5;
    triplet_t expected_triplets[] = { { 1200, 14375, 14425 },
