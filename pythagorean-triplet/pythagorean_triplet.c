@@ -8,7 +8,7 @@ triplets_t *triplets_with_sum(int sum)
     
     triplets_t* result = malloc(sizeof(triplets_t));
     if(result == NULL) return NULL;
-    int capacity = 64;
+    uint16_t capacity = 64;
     triplet_t* triplets = malloc(sizeof(triplet_t)*capacity);
     if(triplets == NULL)
     {
@@ -16,19 +16,21 @@ triplets_t *triplets_with_sum(int sum)
         return NULL;
     }
 
-    uint16_t halfSum = sum / 2;
+    int halfSum = sum / 2;
     uint16_t count = 0;
-    for(uint16_t m = 2; m < halfSum; m++)
+    for(int m = 2; m < halfSum; m++)
     {
-        for(uint16_t n = 1; n < m;n++)
+        for(int n = 1; n < m;n++)
         {
-            if ((m - n) % 2 == 0 || gcd(m, n) != 1) continue; 
-            uint16_t temp_a = m * m - n * n;
-            uint16_t temp_b = 2 * m * n;
-            uint16_t temp_c = m * m + n * n;
+            if ((m - n) % 2 == 0 || gcd(m, n) != 1) continue;
+
+            int temp_a = m * m - n * n;
+            int temp_b = 2 * m * n;
+            int temp_c = m * m + n * n;
             int tempSum = temp_a + temp_b + temp_c;
             
             if(tempSum > sum) continue;
+
             // looking for more than primitives
             for(int k = 1; k * tempSum <= sum;k++)
             {
@@ -56,7 +58,9 @@ triplets_t *triplets_with_sum(int sum)
                     b = a;
                     a = temp;
                 }
+
                 if(k * tempSum != sum) continue;
+
                 triplets[count].a = a;
                 triplets[count].b = b;
                 triplets[count].c = c;
