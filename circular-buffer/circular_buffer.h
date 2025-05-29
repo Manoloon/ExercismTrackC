@@ -6,7 +6,10 @@ typedef uint8_t buffer_value_t;
 
 typedef struct circular_buffer_t 
 {
-    buffer_value_t* buffer;
+    size_t capacity;
+    size_t head;
+    size_t tail;
+    buffer_value_t* values;
 }circular_buffer_t;
 
 
