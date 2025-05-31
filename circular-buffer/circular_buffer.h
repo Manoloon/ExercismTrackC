@@ -1,6 +1,7 @@
 #ifndef CIRCULAR_BUFFER_H
 #define CIRCULAR_BUFFER_H
 #include <stdint.h>
+#include <stddef.h>
 
 typedef uint8_t buffer_value_t;
 
