@@ -18,7 +18,6 @@ circular_buffer_t *new_circular_buffer(size_t capacity)
     new_buffer->capacity = capacity;
     new_buffer->head = 0;
     new_buffer->tail = 0;
-    new_buffer->size = 0;
     new_buffer->num_items = 0;
     return new_buffer;
 }
@@ -41,7 +40,6 @@ void clear_buffer(circular_buffer_t *buffer)
     }
     buffer->head = 0;
     buffer->tail = 0;
-    buffer->size = 0;
     buffer->num_items = 0;
 }
 
@@ -49,44 +47,52 @@ int16_t read(circular_buffer_t *buffer, buffer_value_t* OutValue)
 {
     if(buffer == NULL)
     {
-        fprintf(stderr,"Read from an empty buffer is WRONG");
-        return 1;
+        errno = ENODATA;
+        return EXIT_FAILURE;
     }
-    if(buffer->num_items == 0) return 1;
+    if(buffer->num_items == 0)
+    {
+        errno = ENODATA;
+        return EXIT_FAILURE;
+    }
     *OutValue = buffer->values[buffer->head];
     buffer->num_items--;
-    buffer->head = (buffer->head + 1) % buffer->size;
-    return 0;
-    
+    buffer->head = (buffer->head + 1) % buffer->capacity;
+    return EXIT_SUCCESS;
 }
 
 int16_t write(circular_buffer_t *buffer, buffer_value_t values)
 {
     if(buffer == NULL)
     {
-        return 1;
+        return EXIT_FAILURE;
     }
     // is full
-    if(buffer->capacity == buffer->num_items)
+    if(buffer->capacity <= buffer->num_items)
     {
-        overwrite(buffer,values);
+        errno = ENOBUFS;
+        return EXIT_FAILURE;
     }
     else
     {
-        buffer->tail = (buffer->tail + 1) % buffer->size;
         buffer->values[buffer->tail] = values;
+        buffer->tail = (buffer->tail + 1) % buffer->capacity;
         buffer->num_items++;
     }
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 int16_t overwrite(circular_buffer_t *buffer, buffer_value_t values)
 {
     if(buffer == NULL || values == 0)
     {
-        return 1;
+        return EXIT_FAILURE;
     }
-    buffer->values[0] = values;
-    buffer->tail = 0;
-    return 0;
+    // if full , advance head to discard the oldest
+    if(buffer->num_items == buffer->capacity)
+    {
+        buffer->head = (buffer->head +1) % buffer->capacity;
+        buffer->num_items--;
+    }
+    return write(buffer,values);
 }

@@ -9,7 +9,6 @@ typedef struct circular_buffer_t
     size_t capacity;
     size_t head;
     size_t tail;
-    size_t size;
     size_t num_items;
     buffer_value_t* values;
 }circular_buffer_t;
