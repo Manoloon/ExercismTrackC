@@ -46,7 +46,7 @@ static void test_data_smaller_number_at_left_node(void)
 
 static void test_data_same_number_at_left_node(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
    int tree_data[] = { 4, 4 };
    node_t *tree = build_tree(tree_data, ARRAY_SIZE(tree_data));
 
@@ -64,7 +64,7 @@ static void test_data_same_number_at_left_node(void)
 
 static void test_data_greater_number_at_right_node(void)
 {
-   TEST_IGNORE();
+  // TEST_IGNORE();
    int tree_data[] = { 4, 5 };
    node_t *tree = build_tree(tree_data, ARRAY_SIZE(tree_data));
 
@@ -82,7 +82,7 @@ static void test_data_greater_number_at_right_node(void)
 
 static void test_data_can_create_complex_tree(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
    int tree_data[] = { 4, 2, 6, 1, 3, 5, 7 };
    node_t *tree = build_tree(tree_data, ARRAY_SIZE(tree_data));
 
@@ -120,7 +120,7 @@ static void test_data_can_create_complex_tree(void)
 
 static void test_sorted_data_can_sort_single_number(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
    int tree_data[] = { 2 };
    node_t *tree = build_tree(tree_data, ARRAY_SIZE(tree_data));
 

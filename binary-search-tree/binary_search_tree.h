@@ -14,4 +14,6 @@ node_t *build_tree(int *tree_data, size_t tree_data_len);
 void free_tree(node_t *tree);
 int *sorted_data(node_t *tree);
 
+node_t* insert(node_t* root, int tree_data);
+
 #endif

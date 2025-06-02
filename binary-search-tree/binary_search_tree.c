@@ -1,44 +1,54 @@
 #include "binary_search_tree.h"
 #include <stdlib.h>
-#include <stdio.h>
+
 node_t *build_tree(int *tree_data, size_t tree_data_len)
 {
-    if(tree_data == NULL) return NULL;
-    node_t* result = malloc(sizeof(node_t));
-    if(result == NULL) return NULL;
-    printf("len %lld\n",tree_data_len);
-    if(tree_data_len < 2)
-    {
-        result->data = *tree_data;
-        result->left = NULL;
-        result->right = NULL;
-        return result;
-    }
+    if(tree_data == NULL || tree_data_len == 0) return NULL;
+
+    node_t* root = NULL;
+
     for(size_t i = 0; i < tree_data_len;++i)
     {
-        printf("data at %lld  = %d\n",i,tree_data[i]);
-            // left
-            if(tree_data[i] < tree_data[0])
-            {
-                result->left->data = tree_data[i];
-                result->right = NULL;
-            }
-            else
-            {
-                result->right->data = tree_data[i];
-                result->left = NULL;
-            }
+        root = insert(root,tree_data[i]);
     }
-    return result;
+    return root;
 }
 
 void free_tree(node_t *tree)
 {
+    if(tree == NULL) return;
+    free_tree(tree->left);
+    free_tree(tree->right);
     free(tree);
 }
 
 int *sorted_data(node_t *tree)
 {
     if(tree == NULL) return NULL;
+    
     return &tree->data;
+}
+
+node_t* insert(node_t *root, int tree_data)
+{
+    if(root == NULL)
+    {
+        node_t* new_node = malloc(sizeof(node_t));
+        if(new_node == NULL) return NULL;
+        new_node->data = tree_data;
+        new_node->left = NULL;
+        new_node->right = NULL;
+        return new_node;
+    }
+
+    // insert left
+    if(tree_data <= root->data)
+    {
+        root->left = insert(root->left,tree_data);
+    }
+    else
+    {
+        root->right = insert(root->right,tree_data);
+    }
+    return root;
 }
