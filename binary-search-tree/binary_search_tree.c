@@ -1,6 +1,5 @@
 #include "binary_search_tree.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 node_t *build_tree(int *tree_data, size_t tree_data_len)
 {
@@ -18,6 +17,7 @@ node_t *build_tree(int *tree_data, size_t tree_data_len)
 void free_tree(node_t *tree)
 {
     if(tree == NULL) return;
+    
     free_tree(tree->left);
     free_tree(tree->right);
     free(tree);
@@ -26,12 +26,12 @@ void free_tree(node_t *tree)
 int *sorted_data(node_t *tree)
 {
     if(tree == NULL) return NULL;
+
     size_t num_nodes = count_nodes(tree);
-    printf("num nodes %lld\n",num_nodes);
     int* sorted_data = malloc(num_nodes * sizeof(int));
     if(sorted_data == NULL) return NULL;
     size_t index = 0;
-    fill_inorder(tree,sorted_data,&index);
+    fill_ordered(tree,sorted_data,&index);
     return sorted_data;
 }
 
@@ -41,6 +41,7 @@ node_t* insert(node_t *root, int tree_data)
     {
         node_t* new_node = malloc(sizeof(node_t));
         if(new_node == NULL) return NULL;
+
         new_node->data = tree_data;
         new_node->left = NULL;
         new_node->right = NULL;
@@ -62,13 +63,15 @@ node_t* insert(node_t *root, int tree_data)
 size_t count_nodes(node_t *tree) 
 {
     if (tree == NULL) return 0;
+
     return 1 + count_nodes(tree->left) + count_nodes(tree->right);
 }
 
-void fill_inorder(node_t *tree, int *dataArr, size_t *index)
+void fill_ordered(node_t *tree, int *dataArr, size_t *index)
 {
     if(tree == NULL) return;
-    fill_inorder(tree->left, dataArr, index);
+
+    fill_ordered(tree->left, dataArr, index);
     dataArr[(*index)++] = tree->data;
-    fill_inorder(tree->right, dataArr, index);
+    fill_ordered(tree->right, dataArr, index);
 }

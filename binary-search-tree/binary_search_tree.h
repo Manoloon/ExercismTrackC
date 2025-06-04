@@ -13,8 +13,9 @@ struct node {
 node_t *build_tree(int *tree_data, size_t tree_data_len);
 void free_tree(node_t *tree);
 int *sorted_data(node_t *tree);
+
 // Helper functions
 node_t* insert(node_t* root, int tree_data);
 size_t count_nodes(node_t *tree);
-void fill_inorder(node_t* tree, int* dataArr, size_t* index);
+void fill_ordered(node_t* tree, int* dataArr, size_t* index);
 #endif
