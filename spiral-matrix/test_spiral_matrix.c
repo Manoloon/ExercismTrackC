@@ -34,7 +34,7 @@ static void test_empty_spiral(void)
 
 static void test_trivial_spiral(void)
 {
-   TEST_IGNORE();   // delete this line to run test
+   //TEST_IGNORE();   // delete this line to run test
 
    int expected_matrix[1][1] = {
       { 1 },
@@ -47,7 +47,7 @@ static void test_trivial_spiral(void)
 
 static void test_spiral_of_size_2(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
 
    int expected_matrix[2][2] = {
       { 1, 2 },
