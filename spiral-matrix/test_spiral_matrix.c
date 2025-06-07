@@ -61,7 +61,7 @@ static void test_spiral_of_size_2(void)
 
 static void test_spiral_of_size_3(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
 
    int expected_matrix[3][3] = {
       { 1, 2, 3 },
@@ -76,7 +76,7 @@ static void test_spiral_of_size_3(void)
 
 static void test_spiral_of_size_4(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
 
    int expected_matrix[4][4] = {
       { 1, 2, 3, 4 },
@@ -92,7 +92,7 @@ static void test_spiral_of_size_4(void)
 
 static void test_spiral_of_size_5(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
 
    int expected_matrix[5][5] = {
       { 1, 2, 3, 4, 5 },       //

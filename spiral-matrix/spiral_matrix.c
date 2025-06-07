@@ -1,7 +1,6 @@
 #include "spiral_matrix.h"
 #include <stdlib.h>
 #include <stddef.h>
-#include <stdio.h>
 
 spiral_matrix_t *spiral_matrix_create(int num)
 {
@@ -36,14 +35,53 @@ spiral_matrix_t *spiral_matrix_create(int num)
             return NULL;
         }
     }
-    // init 
-    for(int i = 0;i < num;++i)
-    {
-        for(int j = 0; j < num;++j)
+    // init
+    int left = 0;
+    int right = num -1;
+    int top = 0;
+    int Bottom = num -1;
+    int count = 1;
+    /* Process :
+       1) move left : top row : fill from left to right
+       2) move down : second row : fill right most to bottom
+       3) Move Right : Fill bottom row from right to left
+       4) Move Up : Fill left column from bottom to top
+       -- repeat
+    */
+   while(left <= right && top <= Bottom)
+   {
+        // top row
+        for(int i = left; i <= right;++i)
         {
-            new_matrix[i][j] = i+j+1;
+            new_matrix[top][i] = count++;
         }
-    }
+        top++;
+        // fill right col
+        for(int i = top; i <= Bottom; ++i)
+        {
+            new_matrix[i][right] = count++;
+        }
+        right--;
+        // fill bottom row Right To left
+        if(top <= Bottom)
+        {
+            for(int i = right; i >= left;--i)
+            {
+                new_matrix[Bottom][i] = count++;
+            }
+            Bottom--;
+        }
+        // fill left column from bottom to up
+        if(left <= right)
+        {
+            for(int i = Bottom; i >= top; --i)
+            {
+                new_matrix[i][left] = count++;
+            }
+            left++;
+        }
+   }
+
     new_spiral->matrix = new_matrix;
     new_spiral->size = num;
     return new_spiral;
