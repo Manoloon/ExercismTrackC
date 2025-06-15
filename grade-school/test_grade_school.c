@@ -46,7 +46,7 @@ static void test_roster_is_empty_when_no_student_added(void)
 
 static void test_add_student(void)
 {
-   TEST_IGNORE();   // delete this line to run test
+   //TEST_IGNORE();   // delete this line to run test
    roster_t actual;
    init_roster(&actual);
 
