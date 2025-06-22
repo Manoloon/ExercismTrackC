@@ -211,7 +211,7 @@ static void test_students_are_sorted_by_name_in_roster(void)
 
 static void test_students_are_sorted_by_grades_and_then_by_names_in_roster(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
    roster_t expected = { 7,
                          { (student_t){ 1, "Anna" }, (student_t){ 1, "Barb" },
                            (student_t){ 1, "Charlie" },
@@ -233,7 +233,7 @@ static void test_students_are_sorted_by_grades_and_then_by_names_in_roster(void)
 
 static void test_grade_empty_if_no_students_in_roster(void)
 {
-   TEST_IGNORE();
+  // TEST_IGNORE();
    uint8_t desired_grade = 1;
    roster_t roster;
    init_roster(&roster);
@@ -245,7 +245,7 @@ static void test_grade_empty_if_no_students_in_roster(void)
 
 static void test_grade_empty_if_no_students_in_grade(void)
 {
-   TEST_IGNORE();
+  // TEST_IGNORE();
    uint8_t desired_grade = 1;
    roster_t roster;
    init_roster(&roster);
@@ -262,7 +262,7 @@ static void test_grade_empty_if_no_students_in_grade(void)
 
 static void test_student_not_added_to_same_grade_more_than_once(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
    uint8_t desired_grade = 2;
    roster_t expected = { 3,
                          { (student_t){ 2, "Blair" }, (student_t){ 2, "James" },
@@ -282,7 +282,7 @@ static void test_student_not_added_to_same_grade_more_than_once(void)
 
 static void test_student_not_added_to_multiple_grades(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
    uint8_t desired_grade = 2;
    roster_t expected = {
       2, { (student_t){ 2, "Blair" }, (student_t){ 2, "James" } }
@@ -302,7 +302,7 @@ static void test_student_not_added_to_multiple_grades(void)
 
 static void test_student_not_added_to_other_grade_for_multiple_grades(void)
 {
-   TEST_IGNORE();
+   //TEST_IGNORE();
    uint8_t desired_grade = 3;
    roster_t expected = { 1, { (student_t){ 3, "Paul" } } };
    roster_t roster;
@@ -320,7 +320,7 @@ static void test_student_not_added_to_other_grade_for_multiple_grades(void)
 
 static void test_students_are_sorted_by_name_in_grade(void)
 {
-   TEST_IGNORE();
+ //  TEST_IGNORE();
    uint8_t desired_grade = 5;
    roster_t expected = {
       2, { (student_t){ 5, "Bradley" }, (student_t){ 5, "Franklin" } }
