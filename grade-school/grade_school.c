@@ -11,9 +11,8 @@ void init_roster(roster_t *new_roster)
 
 roster_t get_grade(roster_t *roster, uint8_t desiredGrade)
 {
-    roster_t* new_roster = malloc(sizeof(roster_t));
-    if(new_roster == NULL) return *roster;
-    new_roster->count = 0;
+    roster_t new_roster;
+    new_roster.count = 0;
     student_t new_student;
     for(size_t i = 0; i < roster->count;++i)
     {
@@ -21,11 +20,10 @@ roster_t get_grade(roster_t *roster, uint8_t desiredGrade)
         {   
             new_student.grade = roster->students[i].grade;
             strcpy(new_student.name,roster->students[i].name);
-            new_roster->students[i] = new_student;
-            new_roster->count++;
+            new_roster.students[new_roster.count++] = new_student;
         }
     }
-    return *new_roster;
+    return new_roster;
 }
 
 bool add_student(roster_t *roster, char* name, uint8_t grade)
@@ -41,9 +39,12 @@ bool add_student(roster_t *roster, char* name, uint8_t grade)
     while(pos < roster->count)
     {
         student_t* tempStudent = &roster->students[pos];
+    
+        // sort by grade
         if(grade < tempStudent->grade)
             break;
-        if(tempStudent->grade == grade && strcmp(name,tempStudent->name) < 0)
+        // sort by name
+        if((tempStudent->grade == grade || grade > tempStudent->grade) && strcmp(name,tempStudent->name) < 0)
             break;
         pos++;
     }
@@ -54,7 +55,9 @@ bool add_student(roster_t *roster, char* name, uint8_t grade)
     }
     student_t new_student;
     new_student.grade = grade;
-    strcpy (new_student.name,name); 
+    strcpy (new_student.name,name);
+    //printf("position final %lld\n",pos);
+
     roster->students[pos] = new_student;
     roster->count++;
     return true;
