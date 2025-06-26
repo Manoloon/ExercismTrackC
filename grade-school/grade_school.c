@@ -44,7 +44,7 @@ bool add_student(roster_t *roster, char* name, uint8_t grade)
         if(grade < tempStudent->grade)
             break;
         // sort by name
-        if((tempStudent->grade == grade || grade > tempStudent->grade) && strcmp(name,tempStudent->name) < 0)
+        if((tempStudent->grade == grade) && strcmp(name,tempStudent->name) < 0)
             break;
         pos++;
     }
@@ -56,7 +56,6 @@ bool add_student(roster_t *roster, char* name, uint8_t grade)
     student_t new_student;
     new_student.grade = grade;
     strcpy (new_student.name,name);
-    //printf("position final %lld\n",pos);
 
     roster->students[pos] = new_student;
     roster->count++;
